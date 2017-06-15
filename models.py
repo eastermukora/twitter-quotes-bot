@@ -10,6 +10,7 @@ class Quote(Model):
 
 	@classmethod
 	def create_quote(cls, quote, author):
+		"""Adds a new quote to the database."""
 		try:
 			with config.DATABASE.transaction():
 				cls.create(
