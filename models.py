@@ -8,6 +8,17 @@ class Quote(Model):
 	quote = TextField(unique=True)
 	author = TextField()
 
+	@classmethod
+	def create_quote(cls, quote, author):
+		try:
+			with config.DATABASE.transaction():
+				cls.create(
+					quote=quote,
+					author=author
+				)
+		except IntegrityError:
+			pass
+
 	@staticmethod
 	def random_quote():
 		"""Returns a random quote from database"""
