@@ -11,6 +11,7 @@ app.secret_key = config.SECRET_KEY
 
 @app.route('/', methods=('GET', 'POST'))
 def add_quote():
+	"""Single route in the Flask app. Shows a form that can be used to add quotes and their authors."""
 	form = forms.AddQuoteForm()
 	if form.validate_on_submit():
 		flash("New quote added!")
