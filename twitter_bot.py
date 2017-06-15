@@ -35,7 +35,7 @@ def bot_loop():
 	previous_tweet = None
 	tweet = None
 	print("*** Twitterbot running... ***")
-	for _ in range(1, 5):
+	while True:
 		while previous_tweet == tweet:
 			quote = models.Quote.random_quote()
 			if quote:
