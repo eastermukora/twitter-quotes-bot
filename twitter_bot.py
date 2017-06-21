@@ -24,7 +24,7 @@ def clear_screen():
 
 def prepare_tweet(quote, author):
 	"""Prepares the tweet to be sent."""
-	tweet = "'{}' ~{}".format(quote, author)
+	tweet = '"{}" ~{}'.format(quote, author)
 	if len(tweet) > 135:
 		tweet = None
 	return tweet
