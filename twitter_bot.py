@@ -41,7 +41,9 @@ def bot_loop():
 			if quote:
 				tweet = prepare_tweet(quote.quote, quote.author)
 		if tweet:
-			api.update_status(tweet)
+			print("*** Sharing tweet... ***")
+			print(tweet)
+			api.update_status(status=tweet)
 		previous_tweet = tweet
 		sleep(10800)
 
