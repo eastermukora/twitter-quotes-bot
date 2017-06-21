@@ -1,5 +1,7 @@
 # Quotes Twitter Bot
 
+You can see this bot in action by checking out the [Motivation Quotes](https://twitter.com/myquotebot) Twitter.
+
 `twitter_bot.py` is the main file. Using `python twitter_bot.py` starts the twitter bot.
 
 `add_quote.py` is a Flask app that allows you to add quotes to the database. Using `python add_quote.py` will create a single route with a form to submit quotes and their authors.
@@ -26,3 +28,5 @@ You will also need to create a `config.py` file with the following constants:
 - SECRET_KEY - Secret key for Flask
 
 Since this is intended to only run locally for me, there is no authentication for the add_quote.py file. I only start flask when I want to add a quote and then kill the app when finished. If you upload this onto an actual server with the route exposed, you will want to add some authentication to that route.
+
+In the very near future, I will probably be shifting this to a VPS. At that point, I will add in extra security to the flask app as well as more functions around adding, editing, and deleting quotes.
