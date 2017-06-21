@@ -1,7 +1,7 @@
-# File name: twitter_bot.py
+# App: Quotes Twitter Bot
 # Author: Frank Corso
 # Date created: 06/14/2017
-# Date last modified: 06/15/2017
+# Date last modified: 06/21/2017
 # Python Version: 3.6.1
 
 
