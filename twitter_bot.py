@@ -19,14 +19,23 @@ api = tweepy.API(auth)
 
 
 def clear_screen():
-    os.system("cls" if os.name == 'nt' else 'clear')
+	os.system("cls" if os.name == 'nt' else 'clear')
 
 
 def prepare_tweet(quote, author):
 	"""Prepares the tweet to be sent."""
 	tweet = '"{}" ~{}'.format(quote, author)
+	tweet = add_hashtags(tweet)
 	if len(tweet) > 135:
 		tweet = None
+	return tweet
+
+
+def add_hashtags(tweet):
+	if len(tweet) < 130:
+		tweet += ' #quote'
+	if len(tweet) < 125:
+		tweet += ' #motivation'
 	return tweet
 
 
