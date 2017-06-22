@@ -7,6 +7,12 @@
 	</head>
 	<body>
 		<main>
+			<nav>
+				<ul>
+					<li><a href="{{ url_for('add_quote') }}">Add New Quote</a></li>
+					<li><a href="{{ url_for('view_quotes') }}">View Quotes</a></li>
+				</ul>
+			</nav>
 			<h1>{% block main_header %}{% endblock %}</h1>
 			{% block content %}{% endblock %}
 		</main>
