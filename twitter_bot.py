@@ -6,8 +6,9 @@
 
 
 import os
-import tweepy
+import datetime
 from time import sleep
+import tweepy
 
 import config
 import models
@@ -33,6 +34,10 @@ def prepare_tweet(quote, author):
 
 def add_hashtags(tweet):
 	"""Appends related hashtags if space available."""
+	if datetime.datetime.now().weekday == 0 and len(tweet) < 120:
+		tweet += ' #motivationmonday'
+	if datetime.datetime.now().weekday == 2 and len(tweet) < 120:
+		tweet += ' #wisdomwednesday'
 	if len(tweet) < 130:
 		tweet += ' #quote'
 	if len(tweet) < 125:
