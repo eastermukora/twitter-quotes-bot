@@ -3,13 +3,6 @@
 {% block head_title %}Add a quote{% endblock %}
 {% block main_header %}Add A New Quote{% endblock %}
 {% block content %}
-{% with messages = get_flashed_messages() %}
-	{% if messages %}
-		{% for message in messages %}
-			<h2>{{ message }}</h2>
-		{% endfor %}
-	{% endif %}
-{% endwith %}
 <form method="POST" action="" class="form quote-form">
 	{{ form.hidden_tag() }}
 	{% for field in form %}
