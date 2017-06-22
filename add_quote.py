@@ -16,6 +16,7 @@ def add_quote():
 	if form.validate_on_submit():
 		flash("New quote added!")
 		models.Quote.create_quote(form.quote.data, form.author.data)
+		render_template('add_quote.html')
 	return render_template('add_quote.html', form=form)
 
 if __name__ == '__main__':
