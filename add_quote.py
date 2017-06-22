@@ -19,6 +19,17 @@ def add_quote():
 		render_template('add_quote.html')
 	return render_template('add_quote.html', form=form)
 
+
+@app.route('/quotes')
+def view_quotes():
+	"""Shows page listing all quotes."""
+	try:
+		quotes = models.Quote.select()
+	except models.DoesNotExist:
+		quotes = list()
+	return render_template('quotes-list.html', quotes=quotes)
+
+
 if __name__ == '__main__':
 	models.initialize()
 	app.run(debug=config.DEBUG, host=config.HOST, port=config.PORT)
