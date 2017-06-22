@@ -32,6 +32,7 @@ def prepare_tweet(quote, author):
 
 
 def add_hashtags(tweet):
+	"""Appends related hashtags if space available."""
 	if len(tweet) < 130:
 		tweet += ' #quote'
 	if len(tweet) < 125:
