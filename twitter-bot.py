@@ -47,19 +47,30 @@ def add_hashtags(tweet):
 
 def bot_loop():
 	"""Repeatedly pulls random quote and tweets it"""
-	previous_tweet = None
+	previous_tweets = list()
 	tweet = None
 	print("*** Twitterbot running... ***")
 	while True:
-		while previous_tweet == tweet:
+
+		# Creates new tweets and checks that we have not previously tweeted that quote
+		while tweet not in previous_tweets:
 			quote = models.Quote.random_quote()
 			if quote:
 				tweet = prepare_tweet(quote.quote, quote.author)
+
+		# Tries to tweet the quote
 		if tweet:
 			print("*** Sharing tweet... ***")
 			print(tweet)
-			api.update_status(status=tweet)
-		previous_tweet = tweet
+			try:
+				api.update_status(status=tweet)
+			except tweepy.TweepError:
+				continue
+
+		# Adds new tweet to our previous tweets
+		previous_tweets.insert(0, tweet)
+		if len(previous_tweets) > 5:
+			previous_tweets.pop()
 		now = datetime.datetime.now().strftime('%I:%M %p')
 		print("Last tweet time: " + now)
 		sleep(11100) # Tweet every 3 hours and 5 minutes
