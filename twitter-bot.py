@@ -23,6 +23,14 @@ def clear_screen():
 	os.system("cls" if os.name == 'nt' else 'clear')
 
 
+def get_tweet():
+	"""Returns a prepared tweet."""
+	quote = models.Quote.random_quote()
+	if quote:
+		return prepare_tweet(quote.quote, quote.author)
+	return None
+
+
 def prepare_tweet(quote, author):
 	"""Prepares the tweet to be sent."""
 	tweet = '"{}" ~{}'.format(quote, author)
@@ -48,15 +56,13 @@ def add_hashtags(tweet):
 def bot_loop():
 	"""Repeatedly pulls random quote and tweets it"""
 	previous_tweets = list()
-	tweet = None
+	tweet = get_tweet()
 	print("*** Twitterbot running... ***")
 	while True:
 
 		# Creates new tweets and checks that we have not previously tweeted that quote
-		while tweet not in previous_tweets:
-			quote = models.Quote.random_quote()
-			if quote:
-				tweet = prepare_tweet(quote.quote, quote.author)
+		while tweet in previous_tweets:
+			tweet = get_tweet()
 
 		# Tries to tweet the quote
 		if tweet:
