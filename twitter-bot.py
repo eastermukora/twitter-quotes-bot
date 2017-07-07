@@ -73,7 +73,7 @@ def bot_loop():
 			previous_tweets.pop()
 		now = datetime.datetime.now().strftime('%I:%M %p')
 		print("Last tweet time: " + now)
-		sleep(11100) # Tweet every 3 hours and 5 minutes
+		sleep(14700) # Tweet every 4 hours and 5 minutes
 
 
 if __name__ == '__main__':
