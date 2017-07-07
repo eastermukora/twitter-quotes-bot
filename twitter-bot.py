@@ -1,7 +1,7 @@
 # App: Quotes Twitter Bot
 # Author: Frank Corso
 # Date created: 06/14/2017
-# Date last modified: 06/27/2017
+# Date last modified: 07/07/2017
 # Python Version: 3.6.1
 
 
