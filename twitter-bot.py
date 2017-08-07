@@ -12,6 +12,7 @@ import tweepy
 
 import config
 import models
+import photos
 
 
 auth = tweepy.OAuthHandler(config.CONSUMER_KEY, config.CONSUMER_SECRET)
