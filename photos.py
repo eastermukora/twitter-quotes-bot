@@ -21,7 +21,7 @@ def get_random_photo():
 	return None
 
 
-def create_photo( filename ):
+def create_photo(filename):
 	"""Creates a photo by downloading it from Unsplash URL"""
 	photo_url = get_random_photo()
 	if photo_url:
