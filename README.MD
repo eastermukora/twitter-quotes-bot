@@ -4,7 +4,7 @@ You can see this bot in action by checking out the [Motivation Quotes](https://t
 
 `twitter_bot.py` is the main file. Using `python twitter_bot.py` starts the twitter bot.
 
-`add_quote.py` is a Flask app that allows you to add quotes to the database. Using `python add_quote.py` will create a single route with a form to submit quotes and their authors.
+`app.py` is a Flask app that allows you to add quotes to the database. Using `python app.py` will run the app to use a form to submit quotes and their authors.
 
 ## Prereqs:
 
@@ -26,6 +26,9 @@ You will also need to create a `config.py` file with the following constants:
 - PORT - Port for Flask
 - HOST - Host for Flask
 - SECRET_KEY - Secret key for Flask
+- UNSPLASH_ID - ID of Unsplash application
+- UNSPLASH_SECRET - Secret key for Unsplash application
+- UNSPLASH_CALLBACK - Callback for Unsplash application
 
 Since this is intended to only run locally for me, there is no authentication for the add_quote.py file. I only start flask when I want to add a quote and then kill the app when finished. If you upload this onto an actual server with the route exposed, you will want to add some authentication to that route.
 
