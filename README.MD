@@ -12,6 +12,7 @@ You can see this bot in action by checking out the [Motivation Quotes](https://t
 * Tweepy
 * Flask
 * flask_wtf
+* unsplash_python
 
 ## Config File
 
