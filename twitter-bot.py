@@ -67,10 +67,16 @@ def bot_loop():
 
 		# Tries to tweet the quote
 		if tweet:
+			photo = photos.create_photo('quote-image.jpg')
 			print("*** Sharing tweet... ***")
 			print(tweet)
 			try:
-				api.update_status(status=tweet)
+				# Tweets quote with image if photo isn't None or tweets quote without image
+				if photo:
+					api.update_with_media(filename=photo, status=tweet)
+					os.remove(photo)
+				else:
+					api.update_status(status=tweet)
 			except tweepy.TweepError:
 				continue
 
