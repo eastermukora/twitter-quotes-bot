@@ -1,7 +1,7 @@
-# App: Quotes Twitter Bot
+# App: Quotes Bot
 # Author: Frank Corso
 # Date created: 06/14/2017
-# Date last modified: 07/0/2017
+# Date last modified: 08/15/2017
 # Python Version: 3.6.1
 
 
@@ -79,7 +79,6 @@ def bot_loop():
 		if tweet:
 			photo = photos.create_photo(pic_file)
 			print("*** Sharing tweet... ***")
-			print(tweet)
 			try:
 				# Tweets quote with image if photo isn't None or tweets quote without image
 				if photo:
@@ -89,9 +88,10 @@ def bot_loop():
 				else:
 					api.update_status(status=tweet)
 			except tweepy.TweepError:
-				continue
+				print("Error from Tweepy: {}".format(TweepError.message[0]['code']))
 
 		# Adds new tweet to our previous tweets
+		print(tweet)
 		previous_tweets.insert(0, tweet)
 		if len(previous_tweets) > 5:
 			previous_tweets.pop()
