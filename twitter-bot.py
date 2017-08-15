@@ -18,6 +18,7 @@ import photos
 auth = tweepy.OAuthHandler(config.CONSUMER_KEY, config.CONSUMER_SECRET)
 auth.set_access_token(config.ACCESS_TOKEN, config.ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
+pic_file = 'quote-image.jpg'
 
 
 def clear_screen():
@@ -54,6 +55,15 @@ def add_hashtags(tweet):
 	return tweet
 
 
+def add_photographer(tweet, photographer, user):
+	"""Appends photographer's name and profile from UnSplash"""
+	if len(tweet) + len(photographer) < 135:
+		tweet += '<' + photographer + '>'
+	if len(tweet) + 25 < 139:
+		tweet += 'https://unsplash.com/@{}?utm_source=motivational_quotes_bot&utm_medium=referral&utm_campaign=api-credit'.format(user)
+	return tweet
+
+
 def bot_loop():
 	"""Repeatedly pulls random quote and tweets it"""
 	previous_tweets = list()
@@ -67,14 +77,15 @@ def bot_loop():
 
 		# Tries to tweet the quote
 		if tweet:
-			photo = photos.create_photo('quote-image.jpg')
+			photo = photos.create_photo(pic_file)
 			print("*** Sharing tweet... ***")
 			print(tweet)
 			try:
 				# Tweets quote with image if photo isn't None or tweets quote without image
 				if photo:
-					api.update_with_media(filename=photo, status=tweet)
-					os.remove(photo)
+					tweet = add_photographer(tweet, photo["name"], photo["user"])
+					api.update_with_media(filename=pic_file, status=tweet)
+					os.remove(pic_file)
 				else:
 					api.update_status(status=tweet)
 			except tweepy.TweepError:
