@@ -14,7 +14,8 @@ unsplash = Unsplash({
 def get_random_photo():
 	"""Gets a random photo URL from Unsplash"""
 	photo = unsplash.photos().get_random_photo(
-		orientation='landscape'
+		orientation='landscape',
+		collections='1093525'
 	)
 	if photo:
 		return {'url': photo[0]["urls"]["full"], 'name': photo[0]["user"]["name"], 'user': photo[0]["user"]["username"]}
