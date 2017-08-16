@@ -9,6 +9,7 @@ import os
 import datetime
 from time import sleep
 import tweepy
+import facebook
 
 import config
 import models
@@ -18,6 +19,7 @@ import photos
 auth = tweepy.OAuthHandler(config.CONSUMER_KEY, config.CONSUMER_SECRET)
 auth.set_access_token(config.ACCESS_TOKEN, config.ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
+graph = facebook.GraphAPI(config.FB_ACCESS_TOKEN)
 pic_file = 'quote-image.jpg'
 
 
@@ -45,7 +47,7 @@ def prepare_tweet(quote, author):
 def add_hashtags(tweet):
 	"""Appends related hashtags if space available."""
 	if datetime.datetime.now().weekday() == 0 and len(tweet) < 120:
-		tweet += ' #motivationmonday'
+		tweet += ' #mondaymotivation'
 	if datetime.datetime.now().weekday() == 2 and len(tweet) < 120:
 		tweet += ' #wisdomwednesday'
 	if len(tweet) < 130:
@@ -75,20 +77,26 @@ def bot_loop():
 		while tweet in previous_tweets:
 			tweet = get_tweet()
 
-		# Tries to tweet the quote
+		# If tweet has content
 		if tweet:
+			# Creates random photo
 			photo = photos.create_photo(pic_file)
-			print("*** Sharing tweet... ***")
-			try:
-				# Tweets quote with image if photo isn't None or tweets quote without image
-				if photo:
-					tweet = add_photographer(tweet, photo["name"], photo["user"])
+
+			# If photo is not None, share with photo. If not, share just text
+			if photo:
+				tweet = add_photographer(tweet, photo["name"], photo["user"])
+				try:
 					api.update_with_media(filename=pic_file, status=tweet)
-					os.remove(pic_file)
-				else:
+				except tweepy.TweepError:
+					print("Error from Tweepy: {}".format(tweepy.TweepError.message[0]['code']))
+				graph.put_photo(image=open(pic_file, 'rb'), message=tweet)
+				os.remove(pic_file)
+			else:
+				try:
 					api.update_status(status=tweet)
-			except tweepy.TweepError:
-				print("Error from Tweepy: {}".format(tweepy.TweepError.message[0]['code']))
+				except tweepy.TweepError:
+					print("Error from Tweepy: {}".format(tweepy.TweepError.message[0]['code']))
+				graph.put_object(parent_object='me', connection_name='feed', message=tweet)
 
 		# Adds new tweet to our previous tweets
 		print(tweet)
