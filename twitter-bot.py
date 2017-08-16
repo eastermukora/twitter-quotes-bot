@@ -1,12 +1,13 @@
 # App: Quotes Bot
 # Author: Frank Corso
 # Date created: 06/14/2017
-# Date last modified: 08/15/2017
+# Date last modified: 08/16/2017
 # Python Version: 3.6.1
 
 
 import os
 import datetime
+import random
 from time import sleep
 import tweepy
 import facebook
@@ -99,13 +100,19 @@ def bot_loop():
 				graph.put_object(parent_object='me', connection_name='feed', message=tweet)
 
 		# Adds new tweet to our previous tweets
+		print("*** Tweet Shared ***")
 		print(tweet)
 		previous_tweets.insert(0, tweet)
 		if len(previous_tweets) > 5:
 			previous_tweets.pop()
 		now = datetime.datetime.now().strftime('%I:%M %p')
-		print("Last tweet time: " + now)
-		sleep(14700) # Tweet every 4 hours and 5 minutes
+		print("*** Last tweet time: {}***".format(now))
+
+		# Prepares time until next tweet
+		hours = random.randint(1, 4)
+		minutes = random.randint(1, 59)
+		print("*** Sleeping for {} hours and {} minutes ***".format(hours, minutes))
+		sleep((minutes + (hours * 60)) * 60)
 
 
 if __name__ == '__main__':
