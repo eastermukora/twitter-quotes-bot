@@ -109,7 +109,7 @@ def bot_loop():
 		print("*** Last tweet time: {}***".format(now))
 
 		# Prepares time until next tweet
-		hours = random.randint(1, 4)
+		hours = random.randint(1, 5)
 		minutes = random.randint(1, 59)
 		print("*** Sleeping for {} hours and {} minutes ***".format(hours, minutes))
 		sleep((minutes + (hours * 60)) * 60)
