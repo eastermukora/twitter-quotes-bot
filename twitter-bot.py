@@ -88,7 +88,7 @@ def bot_loop():
 				else:
 					api.update_status(status=tweet)
 			except tweepy.TweepError:
-				print("Error from Tweepy: {}".format(TweepError.message[0]['code']))
+				print("Error from Tweepy: {}".format(tweepy.TweepError.message[0]['code']))
 
 		# Adds new tweet to our previous tweets
 		print(tweet)

@@ -18,7 +18,7 @@ def get_random_photo():
 		collections='1093525'
 	)
 	if photo:
-		return {'url': photo[0]["urls"]["full"], 'name': photo[0]["user"]["name"], 'user': photo[0]["user"]["username"]}
+		return {'url': photo[0]["urls"]["regular"], 'name': photo[0]["user"]["name"], 'user': photo[0]["user"]["username"]}
 	return None
 
 
