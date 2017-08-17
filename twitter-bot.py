@@ -90,14 +90,20 @@ def bot_loop():
 					api.update_with_media(filename=pic_file, status=tweet)
 				except tweepy.TweepError:
 					print("Error from Tweepy: {}".format(tweepy.TweepError.message[0]['code']))
-				graph.put_photo(image=open(pic_file, 'rb'), message=tweet)
+				try:
+					graph.put_photo(image=open(pic_file, 'rb'), message=tweet)
+				except facebook.GraphAPIError:
+					print("Error from Facebook: {}".format(facebook.GraphAPIError.message))
 				os.remove(pic_file)
 			else:
 				try:
 					api.update_status(status=tweet)
 				except tweepy.TweepError:
 					print("Error from Tweepy: {}".format(tweepy.TweepError.message[0]['code']))
-				graph.put_object(parent_object='me', connection_name='feed', message=tweet)
+				try:
+					graph.put_object(parent_object='me', connection_name='feed', message=tweet)
+				except facebook.GraphAPIError:
+					print("Error from Facebook: {}".format(facebook.GraphAPIError.message))
 
 		# Adds new tweet to our previous tweets
 		print("*** Tweet Shared ***")
