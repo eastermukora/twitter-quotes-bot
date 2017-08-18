@@ -1,5 +1,7 @@
 import facebook
 
+import config
+
 graph = facebook.GraphAPI(config.FB_ACCESS_TOKEN)
 
 
@@ -23,7 +25,7 @@ def share_photo(quote, author, photo_file, photographer, user):
 
 def add_photographer(post, name, user):
 	"""Adds photographer's name and URL to post"""
-	return post + '\n\n' + 'Photo By: {} ({})'.format(name, user)
+	return post + '\n\n' + 'Photo By: {} (https://unsplash.com/@{}?utm_source=motivational_quotes_bot&utm_medium=referral&utm_campaign=api-credit)'.format(name, user)
 
 
 def prepare_post(quote, author):
