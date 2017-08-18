@@ -1,0 +1,6 @@
+peewee
+tweepy
+flask
+flask_wtf
+unsplash_python
+facebook-sdk
