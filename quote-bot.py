@@ -1,7 +1,7 @@
 # App: Quotes Bot
 # Author: Frank Corso
 # Date created: 06/14/2017
-# Date last modified: 08/17/2017
+# Date last modified: 08/20/2017
 # Python Version: 3.6.1
 
 
@@ -55,7 +55,7 @@ def bot_loop():
 		print("*** Last tweet time: {}***".format(now))
 
 		# Prepares time until next tweet
-		hours = random.randint(1, 5)
+		hours = random.randint(3, 5)
 		minutes = random.randint(1, 59)
 		print("*** Sleeping for {} hours and {} minutes ***".format(hours, minutes))
 		sleep((minutes + (hours * 60)) * 60)
