@@ -1,7 +1,7 @@
 # App: Quotes Bot
 # Author: Frank Corso
 # Date created: 06/14/2017
-# Date last modified: 08/20/2017
+# Date last modified: 08/28/2017
 # Python Version: 3.6.1
 
 
