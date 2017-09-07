@@ -49,6 +49,7 @@ def bot_loop():
 
 		# Adds new tweet to our previous tweets
 		previous_quotes.insert(0, quote.quote)
+		print("*** Quote shared: {}***".format(quote.quote))
 		if len(previous_quotes) > 5:
 			previous_quotes.pop()
 		now = datetime.datetime.now().strftime('%I:%M %p')
