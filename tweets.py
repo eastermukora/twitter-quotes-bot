@@ -20,11 +20,14 @@ def tweet(quote, author):
 
 def tweet_photo(quote, author, photo_file, photographer, user):
 	"""Tweets photo with status message of quote, author, hashtags, photographer's name, and URL"""
-	status = add_photographer(prepare_tweet(quote, author), photographer, user)
-	try:
-		api.update_with_media(filename=photo_file, status=status)
-	except tweepy.TweepError:
-		print("Error from Tweepy: {}".format(tweepy.TweepError.message[0]['code']))
+	status = prepare_tweet(quote, author);
+	# Check to make sure prepare_tweet did not return None
+	if status:
+		tweet = add_photographer(status, photographer, user)
+		try:
+			api.update_with_media(filename=photo_file, status=tweet)
+		except tweepy.TweepError:
+			print("Error from Tweepy: {}".format(tweepy.TweepError.message[0]['code']))
 
 
 def get_tweet():
