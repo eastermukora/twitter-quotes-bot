@@ -10,8 +10,8 @@ def share(quote, author):
 	post = prepare_post(quote, author)
 	try:
 		graph.put_object(parent_object='me', connection_name='feed', message=post)
-	except facebook.GraphAPIError:
-		#print("Error from Facebook: {}".format(facebook.GraphAPIError.message))
+	except facebook.GraphAPIError as e:
+		print("Error from Facebook: {}".format(e))
 		pass
 
 
@@ -20,8 +20,8 @@ def share_photo(quote, author, photo_file, photographer, user):
 	post = add_photographer(prepare_post(quote, author), photographer, user)
 	try:
 		graph.put_photo(image=open(photo_file, 'rb'), message=post)
-	except facebook.GraphAPIError:
-		#print("Error from Facebook: {}".format(facebook.GraphAPIError.message))
+	except facebook.GraphAPIError as e:
+		print("Error from Facebook: {}".format(e))
 		pass
 
 
