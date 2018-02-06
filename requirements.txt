@@ -2,5 +2,5 @@ peewee
 tweepy
 flask
 flask_wtf
-unsplash_python
+python-unsplash
 facebook-sdk
