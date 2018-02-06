@@ -42,28 +42,28 @@ def prepare_tweet(quote, author):
 	"""Prepares the tweet to be sent."""
 	tweet = '"{}" ~{}'.format(quote, author)
 	tweet = add_hashtags(tweet)
-	if len(tweet) > 135:
+	if len(tweet) > 270:
 		tweet = None
 	return tweet
 
 
 def add_hashtags(tweet):
 	"""Appends related hashtags if space available."""
-	if datetime.datetime.now().weekday() == 0 and len(tweet) < 120:
+	if datetime.datetime.now().weekday() == 0 and len(tweet) < 250:
 		tweet += ' #mondaymotivation'
-	if datetime.datetime.now().weekday() == 2 and len(tweet) < 120:
+	if datetime.datetime.now().weekday() == 2 and len(tweet) < 250:
 		tweet += ' #wisdomwednesday'
-	if len(tweet) < 130:
+	if len(tweet) < 260:
 		tweet += ' #quote'
-	if len(tweet) < 125:
+	if len(tweet) < 255:
 		tweet += ' #motivation'
 	return tweet
 
 
 def add_photographer(tweet, photographer, user):
 	"""Appends photographer's name and profile from UnSplash"""
-	if len(tweet) + len(photographer) < 135:
-		tweet += '<' + photographer + '>'
-	if len(tweet) + 25 < 139:
+	if len(tweet) + len(photographer) < 270:
+		tweet += '\n' + 'Photo: ' + photographer + ' '
+	if len(tweet) + 25 < 275:
 		tweet += 'https://unsplash.com/@{}?utm_source=motivational_quotes_bot&utm_medium=referral&utm_campaign=api-credit'.format(user)
 	return tweet
