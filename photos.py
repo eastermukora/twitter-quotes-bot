@@ -1,19 +1,15 @@
-from unsplash_python.unsplash import Unsplash
+from unsplash.api import Api
+from unsplash.auth import Auth
 import requests
 
 import config
 
-
-unsplash = Unsplash({
-	'application_id': config.UNSPLASH_ID,
-	'secret': config.UNSPLASH_SECRET,
-	'callback_url': config.UNSPLASH_CALLBACK
-})
-
+unsplash_auth = Auth(config.UNSPLASH_ID, config.UNSPLASH_SECRET, config.UNSPLASH_CALLBACK, code='')
+unsplash_api = Api(unsplash_auth)
 
 def get_random_photo():
 	"""Gets a random photo URL from Unsplash"""
-	photo = unsplash.photos().get_random_photo(
+	photo = unsplash_api.photos().random(
 		orientation='landscape',
 		collections='1093525'
 	)
