@@ -1,6 +1,8 @@
 from unsplash.api import Api
 from unsplash.auth import Auth
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
 import requests
+import os
 
 import config
 
@@ -18,7 +20,7 @@ def get_random_photo():
 	return None
 
 
-def create_photo(filename):
+def create_photo(quote, filename):
 	"""Creates a photo by downloading it from Unsplash URL"""
 	photo = get_random_photo()
 	if photo:
@@ -29,5 +31,36 @@ def create_photo(filename):
 			).content
 		)
 		f.close()
+		add_quote_to_photo(quote.quote, quote.author, filename)
 		return photo
 	return None
+
+def delete_photo(filename):
+	"""Deletes the photo"""
+	os.remove(filename)
+
+def add_quote_to_photo(quote, author, filename):
+	"""Adds the quote to the photo"""
+
+	# Opens image and makes it darker
+	im = Image.open(filename)
+	im = ImageEnhance.Brightness(im)
+	im = im.enhance(0.2)
+
+	# Add new lines to quote if too long for image
+	new_quote = ''
+	quote_line = ''
+	for word in quote.split():
+		test_line = quote_line
+		test_line += word + ' '
+		if len(test_line) > 30:
+			new_quote += quote_line + '\n'
+			quote_line = ''
+		quote_line += word + ' '
+	new_quote += quote_line
+
+	# Draws quote and author on image
+	draw = ImageDraw.Draw(im)
+	font = ImageFont.truetype("font/BreeSerif-Regular.ttf", 70)
+	draw.multiline_text((30, im.size[1]/5), '{}\n~{}'.format(new_quote, author), font=font, spacing=10)
+	im.save(filename, 'JPEG')
