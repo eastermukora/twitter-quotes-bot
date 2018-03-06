@@ -45,7 +45,7 @@ def add_quote_to_photo(quote, author, filename):
 	# Opens image and makes it darker
 	im = Image.open(filename)
 	im = ImageEnhance.Brightness(im)
-	im = im.enhance(0.2)
+	im = im.enhance(0.25)
 
 	# Add new lines to quote if too long for image
 	new_quote = ''
