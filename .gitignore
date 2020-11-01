@@ -1,3 +1,5 @@
 config.py
 quote.db
 __pycache__
+.venv
+.idea
