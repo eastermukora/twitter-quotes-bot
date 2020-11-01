@@ -1,7 +1,4 @@
-peewee
 tweepy
-flask
-flask_wtf
 python-unsplash
 facebook-sdk
 Pillow
