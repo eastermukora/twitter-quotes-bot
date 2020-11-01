@@ -21,19 +21,29 @@ def get_random_photo():
 	return None
 
 
-def create_photo(quote, author, filename):
-	"""Creates a photo by downloading it from Unsplash URL"""
+def get_photo(quote, author, filename):
+	""""""
 	photo = get_random_photo()
 	if photo:
-		with open(filename, 'wb') as file:
-			file.write(
-				requests.get(
-					photo["url"]
-				).content
-			)
-		add_quote_to_photo(quote, author, filename)
+		create_photo(quote, author, photo['url'], filename)
 		return photo
 	return None
+
+
+def create_photo(quote, author, photo_url, filename):
+	"""Creates a photo by downloading it from Unsplash URL"""
+	download_photo(photo_url, filename)
+	add_quote_to_photo(quote, author, filename)
+
+
+def download_photo(url, filename):
+	"""Downloads a given photo from Unsplash"""
+	with open(filename, 'wb') as file:
+		file.write(
+			requests.get(
+				url
+			).content
+		)
 
 
 def delete_photo(filename):
