@@ -20,7 +20,7 @@ def tweet(quote, author):
 
 def tweet_photo(quote, author, photo_file, photographer, user):
 	"""Tweets photo with status message of quote, author, hashtags, photographer's name, and URL"""
-	status = prepare_tweet(quote, author);
+	status = prepare_tweet(quote, author)
 	# Check to make sure prepare_tweet did not return None
 	if status:
 		tweet = add_photographer(status, photographer, user)
@@ -28,14 +28,6 @@ def tweet_photo(quote, author, photo_file, photographer, user):
 			api.update_with_media(filename=photo_file, status=tweet)
 		except tweepy.TweepError:
 			print("Error from Tweepy: {}".format(tweepy.TweepError.message[0]['code']))
-
-
-def get_tweet():
-	"""Returns a prepared tweet."""
-	quote = models.Quote.random_quote()
-	if quote:
-		return prepare_tweet(quote.quote, quote.author)
-	return None
 
 
 def prepare_tweet(quote, author):

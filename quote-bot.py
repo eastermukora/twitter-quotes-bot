@@ -1,7 +1,7 @@
 # App: Quotes Bot
 # Author: Frank Corso
 # Date created: 06/14/2017
-# Date last modified: 03/07/2018
+# Date last modified: 11/01/2020
 # Python Version: 3.6.1
 
 
@@ -10,9 +10,8 @@ import random
 import os
 from time import sleep
 
-import config
-import models
 import photos
+import quotes
 import tweets
 import posts
 
@@ -25,13 +24,13 @@ def bot_loop():
 	"""Repeatedly pulls random quote and tweets it"""
 	pic_file = 'quote-image.jpg'
 	previous_quotes = list()
-	quote = models.Quote.random_quote()
 	print("*** Twitterbot running... ***")
 	while True:
 
 		# Creates new tweets and checks that we have not previously tweeted that quote
-		while quote.quote in previous_quotes:
-			quote = models.Quote.random_quote()
+		quote, author = quotes.get_random_quote()
+		while quote in previous_quotes:
+			quote, author = quotes.get_random_quote()
 
 		# If tweet has content
 		if quote:
@@ -40,16 +39,16 @@ def bot_loop():
 
 			# If photo is not None, share with photo. If not, share just text
 			if photo:
-				tweets.tweet_photo(quote.quote, quote.author, pic_file, photo["name"], photo["user"])
-				posts.share_photo(quote.quote, quote.author, pic_file, photo["name"], photo["user"])
+				tweets.tweet_photo(quote, author, pic_file, photo["name"], photo["user"])
+				posts.share_photo(quote, author, pic_file, photo["name"], photo["user"])
 				photos.delete_photo(pic_file)
 			else:
-				tweets.tweet(quote.quote, quote.author)
-				posts.share(quote.quote, quote.author)
+				tweets.tweet(quote, author)
+				posts.share(quote, author)
 
 		# Adds new tweet to our previous tweets
-		previous_quotes.insert(0, quote.quote)
-		print("*** Quote shared: {}***".format(quote.quote))
+		previous_quotes.insert(0, quote)
+		print("*** Quote shared: {}***".format(quote))
 		if len(previous_quotes) > 5:
 			previous_quotes.pop()
 		now = datetime.datetime.now().strftime('%I:%M %p')
@@ -64,7 +63,5 @@ def bot_loop():
 
 if __name__ == '__main__':
 	clear_screen()
-	print("*** Starting database... ***")
-	models.initialize()
 	print("*** Starting twitterbot... ***")
 	bot_loop()
