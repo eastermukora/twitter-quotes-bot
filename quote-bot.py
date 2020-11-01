@@ -35,16 +35,16 @@ def bot_loop():
 		# If tweet has content
 		if quote:
 			# Creates random photo
-			photo = photos.create_photo(quote, pic_file)
+			photo = photos.create_photo(quote, author, pic_file)
 
 			# If photo is not None, share with photo. If not, share just text
 			if photo:
 				tweets.tweet_photo(quote, author, pic_file, photo["name"], photo["user"])
-				posts.share_photo(quote, author, pic_file, photo["name"], photo["user"])
+				# posts.share_photo(quote, author, pic_file, photo["name"], photo["user"])
 				photos.delete_photo(pic_file)
 			else:
 				tweets.tweet(quote, author)
-				posts.share(quote, author)
+				# posts.share(quote, author)
 
 		# Adds new tweet to our previous tweets
 		previous_quotes.insert(0, quote)

@@ -13,6 +13,5 @@ You will also need to create a `config.py` file with the following constants:
 - TWITTER_ACCESS_TOKEN - Access token for Twitter app
 - TWITTER_ACCESS_TOKEN_SECRET - Access token secret for Twitter app
 - FB_ACCESS_TOKEN - Access token for Facebook app to post to your Facebook Page
-- UNSPLASH_ID - ID of Unsplash application
-- UNSPLASH_SECRET - Secret key for Unsplash application
-- UNSPLASH_CALLBACK - Callback for Unsplash application
+- UNSPLASH_ACCESS_KEY - Unsplash Access Key
+- UNSPLASH_SECRET_KEY - Unsplash Secret Key
