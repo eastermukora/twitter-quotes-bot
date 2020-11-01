@@ -22,6 +22,6 @@ def get_random_quote():
 
 def add_quote(quote, author):
     """Adds a quote to the CSV."""
-    with open('quotes.csv', mode="a") as quotes_file:
+    with open('quotes.csv', mode="a", newline='') as quotes_file:
         csv_writer = csv.writer(quotes_file)
         csv_writer.writerow([quote, author])

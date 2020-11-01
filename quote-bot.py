@@ -35,7 +35,7 @@ def bot_loop():
 		# If tweet has content
 		if quote:
 			# Creates random photo
-			photo = photos.create_photo(quote, author, pic_file)
+			photo = photos.get_photo(quote, author, pic_file)
 
 			# If photo is not None, share with photo. If not, share just text
 			if photo:
