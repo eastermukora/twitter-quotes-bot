@@ -1,13 +1,14 @@
-from unsplash.api import Api
-from unsplash.auth import Auth
+import os
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
 import requests
-import os
+from unsplash.api import Api
+from unsplash.auth import Auth
 
 import config
 
-unsplash_auth = Auth(config.UNSPLASH_ID, config.UNSPLASH_SECRET, config.UNSPLASH_CALLBACK, code='')
+unsplash_auth = Auth(config.UNSPLASH_ACCESS_KEY, config.UNSPLASH_SECRET_KEY, '', code='')
 unsplash_api = Api(unsplash_auth)
+
 
 def get_random_photo():
 	"""Gets a random photo URL from Unsplash"""
@@ -20,24 +21,25 @@ def get_random_photo():
 	return None
 
 
-def create_photo(quote, filename):
+def create_photo(quote, author, filename):
 	"""Creates a photo by downloading it from Unsplash URL"""
 	photo = get_random_photo()
 	if photo:
-		f = open(filename, 'wb')
-		f.write(
-			requests.get(
-				photo["url"]
-			).content
-		)
-		f.close()
-		add_quote_to_photo(quote.quote, quote.author, filename)
+		with open(filename, 'wb') as file:
+			file.write(
+				requests.get(
+					photo["url"]
+				).content
+			)
+		add_quote_to_photo(quote, author, filename)
 		return photo
 	return None
+
 
 def delete_photo(filename):
 	"""Deletes the photo"""
 	os.remove(filename)
+
 
 def add_quote_to_photo(quote, author, filename):
 	"""Adds the quote to the photo"""
