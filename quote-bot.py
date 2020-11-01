@@ -2,7 +2,7 @@
 # Author: Frank Corso
 # Date created: 06/14/2017
 # Date last modified: 11/01/2020
-# Python Version: 3.6.1
+# Python Version: 3.9.0
 
 
 import datetime
@@ -13,7 +13,7 @@ from time import sleep
 import photos
 import quotes
 import tweets
-import posts
+# import posts
 
 
 def clear_screen():
