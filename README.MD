@@ -8,10 +8,10 @@ You can see this bot in action by checking out the [Motivation Quotes Twitter](h
 
 You will also need to create a `config.py` file with the following constants:
 
-- CONSUMER_KEY - Consumer key for Twitter app
-- CONSUMER_SECRET - Consumer secret for Twitter app
-- ACCESS_TOKEN - Access token for Twitter app
-- ACCESS_TOKEN_SECRET - Access token secret for Twitter app
+- TWITTER_API_KEY - Consumer key for Twitter app
+- TWITTER_API_SECRET - Consumer secret for Twitter app
+- TWITTER_ACCESS_TOKEN - Access token for Twitter app
+- TWITTER_ACCESS_TOKEN_SECRET - Access token secret for Twitter app
 - FB_ACCESS_TOKEN - Access token for Facebook app to post to your Facebook Page
 - UNSPLASH_ID - ID of Unsplash application
 - UNSPLASH_SECRET - Secret key for Unsplash application
